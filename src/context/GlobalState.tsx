@@ -6,7 +6,7 @@ import {
   ContextState,
   initState,
 } from '../interfaces/interface'
-import { addTransaction, deleteTransaction } from './actions'
+import { addTransaction, deleteTransaction } from './Actions'
 
 const initialState: initState = {
   transactions: [],
