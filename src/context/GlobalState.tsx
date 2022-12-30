@@ -1,16 +1,13 @@
 import React, { createContext, useReducer } from 'react'
 import appReducer from './AppReducer'
-import {
-  ACTION_TYPE,
-  Actions,
-  ContextState,
-  initState,
-} from '../interfaces/interface'
-import { addTransaction, deleteTransaction } from './Actions'
+import { ContextState, initState } from '../interfaces/interface'
+import { addTransaction, deleteTransaction, getTransactions } from './Actions'
 
 const initialState: initState = {
   transactions: [],
   user: {},
+  error: null,
+  loading: true,
 }
 
 // creating the context state
@@ -19,12 +16,15 @@ const GlobalContext = createContext<ContextState>({
   ...initialState,
   addTransaction,
   deleteTransaction,
+  getTransactions,
 })
 
 // provider that serves the state
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
+  /*********
+   * 
   // previously USED Actions It has now been moved to Actions.tsx
 
   //   const deleteTransaction: Actions['deleteTrans'] = (payload) => {
@@ -39,10 +39,13 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   //       payload,
   //     })
   //   }
+  
+  *************/
 
   // dispatch passed down as one of the value for context provider
-  deleteTransaction
-  addTransaction
+  //deleteTransaction
+  //addTransaction
+  // getTransactions(dispatch)
 
   return (
     <GlobalContext.Provider
@@ -51,7 +54,10 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         user: state.user,
         deleteTransaction,
         addTransaction,
+        getTransactions,
         dispatch,
+        loading: state.loading,
+        error: state.error,
       }}
     >
       {children}

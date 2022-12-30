@@ -7,7 +7,7 @@ const AddTransaction = () => {
   const [amount, setAmount] = useState<number>(0)
   const { addTransaction, dispatch } = useContext(GlobalContext)
   const transaction: Transaction = {
-    id: Math.floor(Math.random() * 100000000),
+    //id: Math.floor(Math.random() * 100000000),
     amount,
     text: textRef.current?.value!,
   }
