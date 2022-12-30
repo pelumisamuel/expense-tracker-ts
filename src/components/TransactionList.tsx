@@ -5,10 +5,11 @@ import Transactions from './Transactions'
 const TransactionList = () => {
   const { transactions, getTransactions, dispatch } = useContext(GlobalContext)
   useEffect(() => {
-    getTransactions(dispatch!)
+    return () => {
+      getTransactions(dispatch!)
+      console.log(transactions)
+    }
   }, [])
-
-  console.log(transactions)
 
   return (
     <>
